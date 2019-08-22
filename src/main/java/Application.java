@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Application {
@@ -13,6 +14,8 @@ public class Application {
         List<PasswordEntry> passwordEntries = new ArrayList<>();
 
         Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+        StringBuilder sb = new StringBuilder();
 
         while (true) {
             System.out.println("1. Dodaj kolejny folder");
@@ -55,6 +58,15 @@ public class Application {
                         }
                     }
                 case "3":
+                    System.out.println("Podaj liczbę znowów hasła");
+                    sb = new StringBuilder();
+                    int howMany = scanner.nextInt();
+                    for (int i = 0; i < howMany; i++) {
+                        char c = (char) random.nextInt((93) + 33);
+                        sb.append(c);
+                    }
+                    System.out.println(sb);
+                    System.out.println("W pyte grubę i mocne hasło!");
 
 
             }
