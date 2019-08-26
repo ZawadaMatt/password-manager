@@ -34,4 +34,5 @@ public class PasswordEntry {
     public void setDescription(String description) {
         this.description = description;
     }
+
 }
