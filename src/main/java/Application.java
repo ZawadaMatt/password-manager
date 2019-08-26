@@ -1,5 +1,7 @@
 import com.opencsv.CSVWriter;
 
+import java.io.FileNotFoundException;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
@@ -14,7 +16,6 @@ public class Application {
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
         StringBuilder sb = new StringBuilder();
-
 
         String appPass = "haslo";
 
@@ -46,8 +47,9 @@ public class Application {
         while (true) {
             System.out.println("1. Dodaj kolejny folder");
             System.out.println("2. Usun folder");
-            System.out.println("3. Wygeneruj losowe hasło");
-            System.out.println("4. Wyjdź");
+            System.out.println("3. Pokaz hasła :");
+            System.out.println("4. Wygeneruj losowe hasło");
+            System.out.println("5. Wyjdź");
 
             String userInput = scanner.nextLine();
             switch (userInput) {
@@ -84,6 +86,18 @@ public class Application {
                         }
                     }
                 case "3":
+                    System.out.println("Wybierz hasło :");
+                    int interator = 1;
+                    for (PasswordEntry passwordEntry : passwordEntries) {
+                        System.out.println(interator + " " + passwordEntry.getDescription());
+                        interator++;
+                    }
+                    int choice = Integer.parseInt(scanner.nextLine());
+                    System.out.println("Login: " + passwordEntries.get(choice - 1).getLog());
+                    System.out.println("Hasło: " + passwordEntries.get(choice - 1).getPass());
+                    break;
+
+                case "4":
                     System.out.println("Podaj liczbę znaków hasła");
                     sb = new StringBuilder();
                     int howMany = scanner.nextInt();
@@ -94,8 +108,7 @@ public class Application {
                     System.out.println(sb);
                     System.out.println("W pyte grubę i mocne hasło!");
 
-
-                case "4":
+                case "5":
                     System.out.println("Do widzenia");
                     try {
                         saveToFile(passwordEntries, appPass);
@@ -117,12 +130,17 @@ public class Application {
                 '\\',
                 "\n");
 
-        writer.writeNext(appPass.split(";"));
+        //writer.writeNext(appPass.split(";"));
 
         writer.writeAll(passwordEntries.stream()
                 .map(pass -> new String[]{pass.getDescription(), pass.getLog(), pass.getPass()})
                 .collect(Collectors.toList()));
         writer.close();
+    }
+
+    public static List<PasswordEntry> readingFromFile() throws FileNotFoundException {
+
+        return null;
     }
 
 }
