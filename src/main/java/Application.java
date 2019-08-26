@@ -1,7 +1,8 @@
+import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 
-import java.io.FileNotFoundException;
 
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
@@ -12,13 +13,12 @@ public class Application {
     public static void main(String[] args) {
 
         List<PasswordEntry> passwordEntries = new ArrayList<>();
-        EntryPass eP= new EntryPass();
+        EntryPass eP = new EntryPass();
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
         StringBuilder sb = new StringBuilder();
 
-        String appPass = null;
-
+        String appPass = "";
 
 
         if (appPass == null) {
@@ -30,7 +30,7 @@ public class Application {
                 System.out.println("Hasła nie są takie same");
                 System.exit(0);
             } else {
-           appPass=eP.entPass(checkAppPass1);
+                appPass = eP.entPass(checkAppPass1);
             }
 
         }
@@ -53,6 +53,7 @@ public class Application {
 
             String userInput = scanner.nextLine();
             switch (userInput) {
+
                 case "1":
                     System.out.println("Podaj opis: ");
                     String desc = scanner.nextLine();
@@ -68,6 +69,7 @@ public class Application {
                     }
                     passwordEntries.add(new PasswordEntry(desc, log, pass1));
                     break;
+
                 case "2":
                     System.out.println("Podaj nazwe folderu który chcesz usunąć :");
                     userInput = scanner.nextLine();
@@ -85,6 +87,8 @@ public class Application {
                             }
                         }
                     }
+                    break;
+
                 case "3":
                     System.out.println("Wybierz hasło :");
                     int interator = 1;
@@ -138,9 +142,14 @@ public class Application {
         writer.close();
     }
 
-    public static List<PasswordEntry> readingFromFile() throws FileNotFoundException {
+    public static List<PasswordEntry> readingFromFile() throws IOException {
+
+        CSVReader reader = new CSVReader(new FileReader("logs.csv"),
+                ';',
+                '"',
+                '\\');
+        List<PasswordEntry> passwordEntries = new ArrayList<>();
 
         return null;
     }
-
 }
