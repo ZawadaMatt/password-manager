@@ -17,30 +17,35 @@ public class Application {
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
         StringBuilder sb = new StringBuilder();
+        EntryPass eP = new EntryPass();
+
 
         String appPass = null;
 
-        String checkAppPass2;
+
 
         if (appPass == null) {
             System.out.println("Prosze zdefiniowac hasło dla aplikacji");
             String appPass1 = scanner.nextLine();
             System.out.println("Ponowanie podaj swoje hasło");
             String checkAppPass1 = scanner.nextLine();
-            if (!appPass1.equalsIgnoreCase(checkAppPass1)) {
+            if (!appPass1.equals(checkAppPass1)) {
                 System.out.println("Hasła nie są takie same");
 
                 System.exit(0);
 
             } else {
 
-              checkAppPass1 = appPass; //Tu jest problem.
+
+
+              appPass =eP.entPass(checkAppPass1);  //Tu byl problem.
             }
 
         }
 
 
-        System.out.println("Sprawdzamy haslo: " +appPass);
+
+
         System.out.println("Prosze podać hasł do aplikacji");
         String antytThief = scanner.nextLine();
 
