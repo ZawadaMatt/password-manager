@@ -23,7 +23,8 @@ public class Application {
             System.out.println("3. Pokaz hasła :");
             System.out.println("4. Zaaktualizuj dane");
             System.out.println("5. Wygeneruj losowe hasło");
-            System.out.println("6. Wyjdź");
+            System.out.println("6. Pokaz wszystkie foldery");
+            System.out.println("7. Wyjdź");
             String userInput = scanner.nextLine();
             switch (userInput) {
                 case "1":
@@ -42,6 +43,9 @@ public class Application {
                     case5();
                     break;
                 case "6":
+                    case6(passwordEntries);
+                    break;
+                case "7":
                     System.out.println("Do widzenia");
                     try {
                         saveToFile(passwordEntries, appPass);
@@ -59,7 +63,6 @@ public class Application {
 
         BasicTextEncryptor basicTextEncryptor = new BasicTextEncryptor();
         basicTextEncryptor.setPassword(appPass);
-
 
 
     }
@@ -167,5 +170,16 @@ public class Application {
         }
         System.out.println(sb);
         System.out.println("W pyte grubę i mocne hasło!");
+    }
+
+    public static void case6(List<PasswordEntry> passwordEntries) {
+
+        int i = 1;
+
+        for (PasswordEntry passwordEntry : passwordEntries) {
+            System.out.println(i + ": " + passwordEntry.getDescription());
+            i++;
+        }
+        System.out.println();
     }
 }
