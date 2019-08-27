@@ -1,9 +1,10 @@
-import com.opencsv.CSVWriter;
 
-import java.io.FileWriter;
+import org.jasypt.util.text.BasicTextEncryptor;
+
+
 import java.io.IOException;
 import java.util.*;
-import java.util.stream.Collectors;
+
 
 public class Application {
 
@@ -38,8 +39,8 @@ public class Application {
                     case4(passwordEntries);
                     break;
                 case "5":
-                  case5();
-                  break;
+                    case5();
+                    break;
                 case "6":
                     System.out.println("Do widzenia");
                     try {
@@ -56,18 +57,11 @@ public class Application {
 
     public static void saveToFile(List<PasswordEntry> passwordEntries, String appPass) throws IOException {
 
-        CSVWriter writer = new CSVWriter(new FileWriter("logs.csv"),
-                ':',
-                '"',
-                '\\',
-                "\n");
+        BasicTextEncryptor basicTextEncryptor = new BasicTextEncryptor();
+        basicTextEncryptor.setPassword(appPass);
 
-        //writer.writeNext(appPass.split(";"));
 
-        writer.writeAll(passwordEntries.stream()
-                .map(pass -> new String[]{pass.getDescription(), pass.getLog(), pass.getPass()})
-                .collect(Collectors.toList()));
-        writer.close();
+
     }
 
     public static void isItNull(String appPass, EntryPass eP) {
@@ -92,7 +86,6 @@ public class Application {
             System.out.println("Dzwonie po policje!");
             System.exit(0);
         }
-
     }
 
     public static void case1(List<PasswordEntry> passwordEntries) {
